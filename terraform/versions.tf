@@ -4,10 +4,8 @@ provider "aws" {
 }
 
 provider "kubernetes" {
-      source = "hashicorp/kubernetes"
       version = "2.21.1"
     }
 provider "helm"  {
-      source = "hashicorp/helm"
       version = "2.10.1"
     }
