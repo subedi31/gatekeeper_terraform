@@ -22,7 +22,8 @@ jobs:
       - uses: hashicorp/setup-terraform@v2
 
       - name: Terraform Init
-        uses: hashicorp/terraform-github-actions/init@v0.4.0
+        id: init
+        run: terraform init
 
       - name: Terraform Validate
         uses: hashicorp/terraform-github-actions/validate@v0.3.7
