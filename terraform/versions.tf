@@ -3,13 +3,13 @@ provider "aws" {
   region  = "us-west-1"
 }
 
-providers {
+provider {
     kubernetes = {
       source = "hashicorp/kubernetes"
       version = "2.21.1"
     }
   }
-providers {
+provider {
     helm = {
       source = "hashicorp/helm"
       version = "2.10.1"
