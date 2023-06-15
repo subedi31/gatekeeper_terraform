@@ -3,18 +3,15 @@ provider "aws" {
   region  = "us-west-1"
 }
 
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = ">= 3.72"
-    }
+providers {
     kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = ">= 2.10"
-    }
-    helm = {
-      source  = "hashicorp/helm"
-      version = ">= 2.4.1"
+      source = "hashicorp/kubernetes"
+      version = "2.21.1"
     }
   }
-}
+providers {
+    helm = {
+      source = "hashicorp/helm"
+      version = "2.10.1"
+    }
+  }
