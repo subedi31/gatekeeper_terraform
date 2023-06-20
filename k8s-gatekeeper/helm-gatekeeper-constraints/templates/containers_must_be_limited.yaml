@@ -1,11 +1,12 @@
 apiVersion: constraints.gatekeeper.sh/v1beta1
-kind: PodSecurityPolicy
+kind: K8sContainerLimits
 metadata:
-  name: pod-always-nonadmin
+  name: container-must-have-limits
 spec:
   match:
     kinds:
       - apiGroups: [""]
         kinds: ["Pod"]
   parameters:
-    message: "Admin Pods are restricted to Create"
+    cpu: "200m"
+    memory: "1Gi"
