@@ -6,13 +6,56 @@ on:
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  TF_ACTION_WORKING_DIR: 'k8s-gatekeeper'
+  #TF_ACTION_WORKING_DIR: 'k8s-gatekeeper'
   AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
 jobs:
-  tf_fmt:
-    name: Deploy Site
+  job1_create_eks:
+    name: Create EKS cluster gitaction
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./EKS-terraform
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: hashicorp/setup-terraform@v2
+
+      - name: Terraform Init
+        id: init
+        run: terraform init
+
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate -no-color
+
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan -no-color
+        continue-on-error: false
+      name: Deploy Gatekeeper
+    runs-on: ubuntu-latest
+
+  job2_connect_to_eks:
+    name: Connect to eks cluster gitaction
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+      - name: Configure AWS credentials from Test account
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-region: us-west-1
+      - name: Login to EKS
+        run: |
+          aws eks update-kubeconfig --name gitaction
+  
+  job3_deploy_opa_gatekeeper:
+
+    name: OPA gatekeeper
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -35,8 +78,7 @@ jobs:
         run: terraform plan -no-color
         continue-on-error: false
 
-      - uses: actions-hub/kubectl@master
-        env:
-          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
-        with:
-          args: get constraint
+      #- uses: actions-hub/kubectl@master
+      #   KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
+      #  with:
+      #    args: get constraint
