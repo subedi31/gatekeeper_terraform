@@ -19,8 +19,6 @@ jobs:
         working-directory: ./k8s-gatekeeper
 
     steps:
-
-
       - uses: actions/checkout@v3
       - uses: hashicorp/setup-terraform@v2
 
