@@ -37,7 +37,7 @@ jobs:
 
       - name: Terraform Apply
         id: apply
-        run: terraform apply
+        run: terraform apply -auto-approve
 
   job2_connect_to_eks:
     name: Connect to eks cluster gitaction
