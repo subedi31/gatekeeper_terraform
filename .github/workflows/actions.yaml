@@ -23,6 +23,7 @@ jobs:
 
       - name: Terraform Init
         id: init
+        TF_ACTION_WORKING_DIR: 'k8s-gatekeeper'
         run: terraform init
 
       - name: Terraform Validate
