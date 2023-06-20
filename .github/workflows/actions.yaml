@@ -34,8 +34,6 @@ jobs:
         id: plan
         run: terraform plan -no-color
         continue-on-error: false
-      name: Deploy Gatekeeper
-    runs-on: ubuntu-latest
 
   job2_connect_to_eks:
     name: Connect to eks cluster gitaction
