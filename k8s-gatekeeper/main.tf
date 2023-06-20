@@ -49,10 +49,10 @@ resource "helm_release" "gatekeeper-constraints" {
   ]
 }
 
-resource "kubectl_manifest" "my_service" {
+resource "kubectl_manifest" "complaint-pod" {
     yaml_body = file("${path.mainfest}/complaint-pod.yaml")
 }
 
-resource "kubectl_manifest" "my_service" {
+resource "kubectl_manifest" "bad_pod_limit" {
     yaml_body = file("${path.mainfest}/bad_pod_limit.yaml")
 }
