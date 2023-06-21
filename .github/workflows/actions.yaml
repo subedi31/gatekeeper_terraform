@@ -85,7 +85,7 @@ jobs:
       
       - name: Terraform Apply
         id: apply
-        run: terraform apply
+        run: terraform apply -auto-approve
 
       #- uses: actions-hub/kubectl@master
       #   KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
