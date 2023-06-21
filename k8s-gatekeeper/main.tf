@@ -12,11 +12,11 @@ provider "helm" {
   }
 }
 
-#resource "kubernetes_namespace" "gatekeeper" {
-#  metadata {
-#    name = var.namespace
-#  }
-#}
+resource "kubernetes_namespace" "gatekeeper" {
+  metadata {
+   name = var.namespace
+ }
+}
 
 resource "helm_release" "gatekeeper" {
   chart      = "gatekeeper"
