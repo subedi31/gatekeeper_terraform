@@ -9,3 +9,9 @@ variable "helm_release_name" {
   type        = string
   default     = "gatekeeper"
 }
+
+variable "cluster_name"{
+  description = "name of cluster"
+  type = string
+  default = "gitaction"
+}
