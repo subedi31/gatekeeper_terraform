@@ -3,12 +3,12 @@ provider "aws" {
   region  = "us-west-1"
 }
 provider "kubernetes" {
-  config_path = "~/.kube/config"
+  config_path = "${path.root}/.kube/config"
 }
 
 provider "helm" {
   kubernetes {
-  config_path = "~/.kube/config"
+  config_path = "${path.root}/.kube/config"
   }
 }
 
