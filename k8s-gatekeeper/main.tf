@@ -1,3 +1,8 @@
+provider "aws" {
+  version = "~> 3.0"
+  region  = "us-west-1"
+}
+
 provider "helm" {
   kubernetes {
     config_path = "kubeconfig/.kube/config"
