@@ -20,7 +20,7 @@ resource "kubernetes_namespace" "gatekeeper" {
 
 resource "helm_release" "gatekeeper" {
   chart      = "gatekeeper"
-  repository = "https://github.com/open-policy-agent/gatekeeper/tree/master/charts/gatekeeper/crds"
+  repository = "https://github.com/open-policy-agent/gatekeeper/tree/master/charts"
   name       = var.helm_release_name
   namespace  = var.namespace
 
