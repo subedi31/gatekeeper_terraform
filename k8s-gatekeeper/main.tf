@@ -26,17 +26,6 @@ resource "helm_release" "gatekeeper" {
   namespace  = "gatekeeper-system"
 }
 
-# Install the Helm chart
-resource "helm_release" "gatekeeper" {
-  name      = "gatekeeper"
-  repository = helm_repository.gatekeeper.name
-  chart     = "gatekeeper"
-  namespace = "gatekeeper-system"
-
-  create_namespace = true
-}
-
-
 resource "helm_release" "gatekeeper-templates" {
   chart     = "${path.root}/helm-gatekeeper-templates"
   name      = "gatekeeper-templates"
