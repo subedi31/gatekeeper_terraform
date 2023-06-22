@@ -21,7 +21,7 @@ provider "helm" {
 # Add the Helm repository
 resource "helm_release" "gatekeeper" {
   name = "gatekeeper"
-  url  = "https://open-policy-agent.github.io/gatekeeper/charts"
+  repository  = "https://open-policy-agent.github.io/gatekeeper/charts"
   chart      = "gatekeeper"
   namespace  = "gatekeeper-system"
 }
