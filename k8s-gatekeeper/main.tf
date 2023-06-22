@@ -19,12 +19,12 @@ provider "helm" {
 #}
 
 # Add the Helm repository
-resource "helm_release" "gatekeeper" {
-  name = "gatekeeper"
-  repository  = "https://open-policy-agent.github.io/gatekeeper/charts"
-  chart      = "gatekeeper"
-  namespace  = "gatekeeper-system"
-}
+#resource "helm_release" "gatekeeper" {
+#  name = "gatekeeper"
+#  repository  = "https://open-policy-agent.github.io/gatekeeper/charts"
+#  chart      = "gatekeeper"
+#  namespace  = "gatekeeper-system"
+#}
 
 resource "helm_release" "gatekeeper-templates" {
   chart     = "${path.root}/helm-gatekeeper-templates"
