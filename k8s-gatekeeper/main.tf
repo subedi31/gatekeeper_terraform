@@ -32,9 +32,9 @@ resource "helm_release" "gatekeeper-templates" {
   namespace = var.namespace
   version   = "0.0.3"
 
-  depends_on = [
-    helm_release.gatekeeper
-  ]
+  #depends_on = [
+  #  helm_release.gatekeeper
+  #]
 }
 
 resource "helm_release" "gatekeeper-constraints" {
