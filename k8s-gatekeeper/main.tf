@@ -18,16 +18,22 @@ provider "helm" {
 # }
 #}
 
-resource "helm_release" "gatekeeper" {
-  chart      = "gatekeeper"
-  repository = "https://github.com/open-policy-agent/gatekeeper/tree/master/charts/gatekeeper/crds"
-  name       = var.helm_release_name
-  namespace  = var.namespace
-
-  #depends_on = [
-  #  kubernetes_namespace.gatekeeper
-  #]
+# Add the Helm repository
+resource "helm_repository" "gatekeeper" {
+  name = "gatekeeper"
+  url  = "https://open-policy-agent.github.io/gatekeeper/charts"
 }
+
+# Install the Helm chart
+resource "helm_release" "gatekeeper" {
+  name      = "gatekeeper"
+  repository = helm_repository.gatekeeper.name
+  chart     = "gatekeeper"
+  namespace = "gatekeeper-system"
+
+  create_namespace = true
+}
+
 
 resource "helm_release" "gatekeeper-templates" {
   chart     = "${path.root}/helm-gatekeeper-templates"
