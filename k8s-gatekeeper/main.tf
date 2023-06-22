@@ -12,21 +12,21 @@ provider "helm" {
   }
 }
 
-resource "kubernetes_namespace" "gatekeeper" {
-  metadata {
-   name = var.namespace
- }
-}
+#resource "kubernetes_namespace" "gatekeeper" {
+#  metadata {
+#   name = var.namespace
+# }
+#}
 
 resource "helm_release" "gatekeeper" {
   chart      = "gatekeeper"
-  repository = "https://github.com/open-policy-agent/gatekeeper/tree/master/charts"
+  repository = "https://github.com/open-policy-agent/gatekeeper/tree/master/charts/gatekeeper/crds"
   name       = var.helm_release_name
   namespace  = var.namespace
 
-  depends_on = [
-    kubernetes_namespace.gatekeeper
-  ]
+  #depends_on = [
+  #  kubernetes_namespace.gatekeeper
+  #]
 }
 
 resource "helm_release" "gatekeeper-templates" {
