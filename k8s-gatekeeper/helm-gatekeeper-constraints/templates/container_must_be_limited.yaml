@@ -1,7 +1,7 @@
 apiVersion: constraints.gatekeeper.sh/v1beta1
-kind: K8sContainerRequests
+kind: K8sContainerLimits2
 metadata:
-  name: container-must-have-requests
+  name: container-must-have-limits2
 spec:
   match:
     kinds:
@@ -10,4 +10,3 @@ spec:
   parameters:
     cpu: "200m"
     memory: "1Gi"
-

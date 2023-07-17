@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    branches: [amrit]
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./k8s-gatekeeper
+    steps:
+    - uses: actions/checkout@v3
+    - uses: hashicorp/setup-terraform@v2
+    - name: Start minikube
+      uses: medyagh/setup-minikube@master
+    - name: Terraform Init
+      id: init
+      run: terraform init
+      
+    - name: Terraform Validate
+      id: validate
+      run: terraform validate -no-color
+
+    - name: Terraform Plan
+      id: plan
+      run: terraform plan -no-color
+      continue-on-error: false
+      
+    - name: Terraform Apply
+      timeout-minutes: 30
+      id: apply
+      run: terraform apply -auto-approve
+
+    - name: check pods
+      run: |
+        kubectl get pods -n gatekeeper-system
+    - name: list contrainttemplates
+      run: |
+        kubectl get ConstraintTemplate
+    - name: list constraints
+      run: |
+        kubectl get constraints
+    - name: Verify limit policy bad example
+      if: always()
+      run: |
+        kubectl apply -f ./mainfest/bad_pod_limit.yaml
+
+    - name: Verify allowed repo policy bad example
+      continue-on-error: true  
+      run: |
+        kubectl apply -f ./mainfest/bad_allowed_repo.yaml
