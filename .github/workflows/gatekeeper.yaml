@@ -46,7 +46,7 @@ jobs:
       continue-on-error: true  
       run: |
         kubectl apply -f ./mainfest/bad_pod_limit.yaml
-
+        
     - name: Verify auto mount service bad example
       continue-on-error: true  
       run: |
