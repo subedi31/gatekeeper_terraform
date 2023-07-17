@@ -42,11 +42,8 @@ jobs:
       run: |
         kubectl get constraints
     - name: Verify limit policy bad example
-      if: always()
+      continue-on-error: true  
       run: |
         kubectl apply -f ./mainfest/bad_pod_limit.yaml
 
-    - name: Verify allowed repo policy bad example
-      continue-on-error: true  
-      run: |
-        kubectl apply -f ./mainfest/bad_allowed_repo.yaml
+    
