@@ -41,6 +41,7 @@ jobs:
     - name: list constraints
       run: |
         kubectl get constraints
+
     - name: Verify limit policy bad example
       continue-on-error: true  
       run: |
@@ -50,4 +51,11 @@ jobs:
       continue-on-error: true  
       run: |
         kubectl apply -f ./mainfest/automountserviceaccount-badexample.yaml
+
+    - name: Verify block end point service 
+      continue-on-error: true  
+      run: |
+        kubectl apply -f ./mainfest/blockendpointeditdefaultroleConstraints-badexample
+
+    
     
