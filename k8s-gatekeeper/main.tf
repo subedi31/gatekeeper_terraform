@@ -1,14 +1,18 @@
-provider "aws" {
-  version = "~> 4.0"
-  region  = "us-west-1"
-}
+#provider "aws" {
+#  version = "~> 4.0"
+#  region  = "us-west-1"
+#}
 provider "kubernetes" {
-  config_path = "${path.root}/.kube/config"
+  #config_path = "${path.root}/.kube/config"
+  config_path = "~/.kube/config"
+  config_context = "minikube"
 }
 
 provider "helm" {
   kubernetes {
-  config_path = "${path.root}/.kube/config"
+  #config_path = "${path.root}/.kube/config"
+  config_path = "~/.kube/config"
+  config_context = "minikube"
   }
 }
 
